@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multi-Tagger Bookmarklet for WorkFlowy</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: left;
+      margin: 80px;
+    }
+
+    a:link {
+      color: #6ACFCD
+    }
+  </style>
+</head>
+<body>
+  <h3>Version 2.8</h3>
+  <ul>
+    <li><a href="https://gist.github.com/rawbytz/0115704e556a2b54d6247df9be7d7550#file-multitagger-md">Click here for more information.</a></li>
+  </ul>
+  <p>
+    <b>To install, drag the link to your bookmarks bar.</b>
+  </p>
+  <p>
+    <b>
+      <a href="javascript:(function&#32;multiTagger_2_8(){function&#32;toastMsg(str,sec,err){WF.showMessage(str.bold(),err);setTimeout(()=&gt;WF.hideMessage(),(sec||2)*1e3)}function&#32;itemNameHasTag(item,Tag){return&#32;WF.getItemNameTags(item).some(t=&gt;t.tag.toLowerCase()===Tag.toLowerCase())}function&#32;pendOmatic(items,input,prePend){const&#32;inputTag=input.match(/[#@][a-zA-Z0-9][\w:-]*/);const&#32;inputTagTxt=inputTag?inputTag[0].replace(/:{1,2}$/,&quot;&quot;):&quot;&quot;;const&#32;inputHasTagBorder=inputTag?prePend?input.endsWith(inputTagTxt):input.startsWith(inputTagTxt):false;input=htmlEscapeTextForContent(input);const&#32;pend=inputHasTagBorder?prePend?`${input}&#32;`:`&#32;${input}`:input;WF.editGroup(()=&gt;{items.forEach(item=&gt;{if(!inputTag||!itemNameHasTag(item,inputTagTxt)){var&#32;nuName=prePend?pend+item.getName().trimLeft():item.getName().trimRight()+pend;WF.setItemName(item,nuName)}})})}function&#32;createAllTagsDataList(){const&#32;options=getRootDescendantTagCounts().getTagList().map(Tag=&gt;`&lt;option&#32;value=&quot;${Tag.tag}&#32;&quot;&gt;`);return`&lt;datalist&#32;id=&quot;tagPicker&quot;&lt;option&#32;value=&quot;&quot;&gt;${options.join('')}&lt;/datalist&gt;`}function&#32;multiTagAlert(bodyHtml){const&#32;inputStyle='#inputBx{width:95%;height:20px;display:block;margin-top:5px;border:1px&#32;solid&#32;#ccc;border-radius:4px;padding:5px}';const&#32;buttonStyle='.btnX{font-size:18px;background-color:#49baf2;border:2px&#32;solid;border-radius:20px;color:#fff;padding:5px&#32;15px;margin-top:16px;margin-right:16px}.btnX:focus{border-color:#c4c4c4}';const&#32;box=`&lt;div&gt;&lt;input&#32;id=&quot;inputBx&quot;&#32;type=&quot;text&quot;&#32;spellcheck=&quot;false&quot;&#32;list=&quot;tagPicker&quot;&gt;${createAllTagsDataList()}&lt;/div&gt;`;const&#32;b1=`&lt;button&#32;type=&quot;button&quot;&#32;class=&quot;btnX&quot;&#32;id=&quot;btn1&quot;&gt;Append&#32;&amp;#8614;&lt;/button&gt;`;const&#32;b2=`&lt;button&#32;type=&quot;button&quot;&#32;class=&quot;btnX&quot;&#32;id=&quot;btn2&quot;&gt;&amp;#8612;&#32;Prepend&lt;/button&gt;`;WF.showAlertDialog(`&lt;style&gt;${htmlEscapeText(inputStyle+buttonStyle)}&lt;/style&gt;&lt;div&gt;${bodyHtml}&lt;/div&gt;${box}&lt;div&gt;${b1+b2}&lt;/div&gt;`,&quot;Enter&#32;tag&#32;or&#32;text:&quot;);setTimeout(()=&gt;{let&#32;userInput;const&#32;inputBx=document.getElementById(&quot;inputBx&quot;);const&#32;btn1=document.getElementById(&quot;btn1&quot;);const&#32;btn2=document.getElementById(&quot;btn2&quot;);inputBx.select();inputBx.addEventListener(&quot;keyup&quot;,event=&gt;{if(event.key===&quot;Enter&quot;)btn1.click()});btn1.onclick=(()=&gt;{userInput=inputBx.value;WF.hideDialog();setTimeout(()=&gt;pendOmatic(selections,userInput),50)});btn2.onclick=(()=&gt;{userInput=inputBx.value;WF.hideDialog();setTimeout(()=&gt;pendOmatic(selections,userInput,true),50)})},100)}const&#32;selections=WF.getSelection().filter(item=&gt;!item.isReadOnly());if(selections.length===0){return&#32;void&#32;toastMsg(`Use&#32;WorkFlowy's&#32;multi-select&#32;to&#32;select&#32;bullets,&#32;and&#32;try&#32;again.&#32;&lt;i&gt;(Alt+Click&#32;or&#32;Cmd+Click)&lt;/i&gt;`,3,true)}multiTagAlert(`&lt;i&gt;${selections.length}&#32;items&lt;/i&gt;`)})();">multiTagger</a>
+    </b>
+  </p>
+  <br>
+  <p>
+    <a href="https://rawbytz.wordpress.com">rawbytz.wordpress.com</a>
+  </p>
+</body>
+</html>
