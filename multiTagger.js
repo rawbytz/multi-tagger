@@ -3,9 +3,7 @@
     WF.showMessage(str, err);
     setTimeout(WF.hideMessage, (sec || 2) * 1000);
   }
-  function itemNameHasTag(item, Tag) {
-    return WF.getItemNameTags(item).some(t => t.tag.toLowerCase() === Tag.toLowerCase());
-  }
+  const itemNameHasTag = (item, Tag) => WF.getItemNameTags(item).some(t => t.tag.toLowerCase() === Tag.toLowerCase());
   function pendOmatic(items, input, prePend) {
     const inputTag = input.match(/[#@][a-zA-Z0-9][\w:-]*/);
     const inputTagTxt = inputTag ? inputTag[0].replace(/:{1,2}$/, "") : "";
