@@ -4,11 +4,12 @@
     setTimeout(WF.hideMessage, (sec || 2) * 1000);
   }
   const itemNameHasTag = (item, Tag) => WF.getItemNameTags(item).some(t => t.tag.toLowerCase() === Tag.toLowerCase());
+  const htmlEscTextForContent = str => str.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/\u00A0/g, " ");
   function pendOmatic(items, input, prePend) {
     const inputTag = input.match(/[#@][a-zA-Z0-9][\w:-]*/);
     const inputTagTxt = inputTag ? inputTag[0].replace(/:{1,2}$/, "") : "";
     const inputHasTagBorder = inputTag ? prePend ? input.endsWith(inputTagTxt) : input.startsWith(inputTagTxt) : false;
-    input = htmlEscapeTextForContent(input);
+    input = htmlEscTextForContent(input);
     const pend = inputHasTagBorder ? prePend ? `${input} ` : ` ${input}` : input;
     WF.editGroup(() => {
       items.forEach((item) => {
