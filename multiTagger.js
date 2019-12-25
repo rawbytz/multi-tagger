@@ -1,7 +1,7 @@
 (function multiTagger_2_9() {
   function toastMsg(str, sec, err) {
-    WF.showMessage(str.bold(), err);
-    setTimeout(() => WF.hideMessage(), (sec || 2) * 1000);
+    WF.showMessage(str, err);
+    setTimeout(WF.hideMessage, (sec || 2) * 1000);
   }
   function itemNameHasTag(item, Tag) {
     return WF.getItemNameTags(item).some(t => t.tag.toLowerCase() === Tag.toLowerCase());
