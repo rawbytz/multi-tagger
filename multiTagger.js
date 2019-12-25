@@ -1,4 +1,4 @@
-(function multiTagger_2_8() {
+(function multiTagger_2_9() {
   function toastMsg(str, sec, err) {
     WF.showMessage(str.bold(), err);
     setTimeout(() => WF.hideMessage(), (sec || 2) * 1000);
