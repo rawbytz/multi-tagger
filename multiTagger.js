@@ -5,6 +5,7 @@
   }
   const itemNameHasTag = (item, Tag) => WF.getItemNameTags(item).some(t => t.tag.toLowerCase() === Tag.toLowerCase());
   const htmlEscTextForContent = str => str.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/\u00A0/g, " ");
+  const htmlEscText = str => htmlEscTextForContent(str).replace(/"/g, "&quot;");
   function pendOmatic(items, input, prePend) {
     const inputTag = input.match(/[#@][a-zA-Z0-9][\w:-]*/);
     const inputTagTxt = inputTag ? inputTag[0].replace(/:{1,2}$/, "") : "";
@@ -30,7 +31,7 @@
     const box = `<div><input id="inputBx" type="text" spellcheck="false" list="tagPicker">${createAllTagsDataList()}</div>`;
     const b1 = `<button type="button" class="btnX" id="btn1">Append &#8614;</button>`;
     const b2 = `<button type="button" class="btnX" id="btn2">&#8612; Prepend</button>`;
-    WF.showAlertDialog(`<style>${htmlEscapeText(inputStyle + buttonStyle)}</style><div>${bodyHtml}</div>${box}<div>${b1 + b2}</div>`, "Enter tag or text:");
+    WF.showAlertDialog(`<style>${htmlEscText(inputStyle + buttonStyle)}</style><div>${bodyHtml}</div>${box}<div>${b1 + b2}</div>`, "Enter tag or text:");
     setTimeout(() => {
       let userInput;
       const inputBx = document.getElementById("inputBx");
