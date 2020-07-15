@@ -5,7 +5,7 @@
   }
   const itemNameHasTag = (item, Tag) => WF.getItemNameTags(item).some(t => t.tag.toLowerCase() === Tag.toLowerCase());
   const htmlEscTextForContent = str => str.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/\u00A0/g, " ");
-  const htmlEscText = str => htmlEscTextForContent(str).replace(/"/g, "&quot;");
+  const htmlEscText = str => str.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
   function pendOmatic(items, input, prePend) {
     const inputTag = input.match(/[#@][a-zA-Z0-9][\w:-]*/);
     const inputTagTxt = inputTag ? inputTag[0].replace(/:{1,2}$/, "") : "";
