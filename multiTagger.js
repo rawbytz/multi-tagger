@@ -30,12 +30,12 @@
     return p ? `color:${getComputedStyle(p).color};background:${getComputedStyle(p).backgroundColor};` : "";
   }
   function multiTagAlert(bodyHtml) {
+    const addButton = (num, name) => `<button type="button" class="btnX" id="btn${num.toString()}">${name}</button>`;
     const inputStyle = `#inputBx{${getColors()}width:95%;height:20px;display:block;margin-top:5px;border:1px solid #ccc;border-radius:4px;padding:5px}`;
     const buttonStyle = '.btnX{font-size:18px;background-color:steelblue;border:2px solid;border-radius:20px;color:#fff;padding:5px 15px;margin-top:16px;margin-right:16px}.btnX:focus{border-color:#c4c4c4}';
     const box = `<div><input id="inputBx" type="text" spellcheck="false" list="tagPicker">${createAllTagsDataList()}</div>`;
-    const b1 = `<button type="button" class="btnX" id="btn1">Append &#8614;</button>`;
-    const b2 = `<button type="button" class="btnX" id="btn2">&#8612; Prepend</button>`;
-    WF.showAlertDialog(`<style>${htmlEscText(inputStyle + buttonStyle)}</style><div>${bodyHtml}</div>${box}<div>${b1 + b2}</div>`, "Enter tag or text:");
+    const buttons = addButton(1, "Append &#8614;") + addButton(2, "&#8612; Prepend");
+    WF.showAlertDialog(`<style>${htmlEscText(inputStyle + buttonStyle)}</style><div>${bodyHtml}</div>${box}<div>${buttons}</div>`, "Enter tag or text:");
     setTimeout(() => {
       let userInput;
       const inputBx = document.getElementById("inputBx");
