@@ -50,12 +50,18 @@
         btn1.onclick = () => {
           userInput = inputBx.value;
           WF.hideDialog();
-          setTimeout(() => pendOmatic(selections, userInput), 50);
+          setTimeout(() => {
+            pendOmatic(selections, userInput);
+            WF.setSelection(selections);
+          }, 50);
         };
         btn2.onclick = () => {
           userInput = inputBx.value;
           WF.hideDialog();
-          setTimeout(() => pendOmatic(selections, userInput, true), 50);
+          setTimeout(() => {
+            pendOmatic(selections, userInput, true);
+            WF.setSelection(selections);
+          }, 50);
         };
       }
     }, 50);
@@ -64,5 +70,6 @@
   if (selections.length === 0) {
     return void toastMsg(`Use WorkFlowy's multi-select to select bullets, and try again. <i>(Alt+Click or Cmd+Click)</i>`, 3, true);
   }
+  WF.setSelection([]);  // Clear selections so arrow keys work
   multiTagAlert(`<i>${selections.length} items</i>`);
 })();
