@@ -1,7 +1,7 @@
 (function multiTagger_3_1() {
   function toastMsg(str, sec, err) {
-    WF.showMessage(str, err);
-    setTimeout(WF.hideMessage, (sec || 2) * 1000);
+    WF.showMessage(str, err);
+    setTimeout(WF.hideMessage, (sec || 2) * 1000);
   }
   const itemNameHasTag = (item, Tag) => WF.getItemNameTags(item).some(t => t.tag.toLowerCase() === Tag.toLowerCase());
   const htmlEscTextForContent = str => str.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/\u00A0/g, " ");
@@ -36,26 +36,29 @@
     const box = `<div><input id="inputBx" type="text" spellcheck="false" list="tagPicker">${createAllTagsDataList()}</div>`;
     const buttons = addButton(1, "Append &#8614;") + addButton(2, "&#8612; Prepend");
     WF.showAlertDialog(`<style>${htmlEscText(inputStyle + buttonStyle)}</style><div>${bodyHtml}</div>${box}<div>${buttons}</div>`, "Enter tag or text:");
-    setTimeout(() => {
-      let userInput;
-      const inputBx = document.getElementById("inputBx");
-      const btn1 = document.getElementById("btn1");
-      const btn2 = document.getElementById("btn2");
-      inputBx.select();
-      inputBx.addEventListener("keyup", (event) => {
-        if (event.key === "Enter") btn1.click();
-      });
-      btn1.onclick = () => {
-        userInput = inputBx.value;
-        WF.hideDialog();
-        setTimeout(() => pendOmatic(selections, userInput), 50);
-      };
-      btn2.onclick = () => {
-        userInput = inputBx.value;
-        WF.hideDialog();
-        setTimeout(() => pendOmatic(selections, userInput, true), 50);
-      };
-    }, 100);
+    const intervalId = setInterval(function () {
+      let inputBx = document.getElementById("inputBx");
+      if (inputBx) {
+        clearInterval(intervalId);
+        let userInput;
+        const btn1 = document.getElementById("btn1");
+        const btn2 = document.getElementById("btn2");
+        inputBx.select();
+        inputBx.addEventListener("keyup", (event) => {
+          if (event.key === "Enter") btn1.click();
+        });
+        btn1.onclick = () => {
+          userInput = inputBx.value;
+          WF.hideDialog();
+          setTimeout(() => pendOmatic(selections, userInput), 50);
+        };
+        btn2.onclick = () => {
+          userInput = inputBx.value;
+          WF.hideDialog();
+          setTimeout(() => pendOmatic(selections, userInput, true), 50);
+        };
+      }
+    }, 50);
   }
   const selections = WF.getSelection().filter(item => !item.isReadOnly());
   if (selections.length === 0) {
